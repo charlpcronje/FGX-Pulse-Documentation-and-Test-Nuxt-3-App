@@ -9,27 +9,28 @@
 | 5 | ./tailwind.config.js | 14 | 20 | 86 |
 | 6 | ./nuxt.config.ts | 42 | 86 | 148 |
 | 7 | ./tree.md | 55 | 110 | 360 |
-| 8 | ./server/tsconfig.json | 4 | 4 | 10 |
-| 9 | ./server/api/login.post.ts | 32 | 107 | 170 |
-| 10 | ./pages/index.vue | 10 | 26 | 68 |
-| 11 | ./pages/login.vue | 66 | 192 | 393 |
-| 12 | ./pages/documentation.vue | 5 | 9 | 27 |
-| 13 | ./pages/test-endpoints.vue | 11 | 21 | 49 |
-| 14 | ./pages/[...slug].vue | 5 | 8 | 23 |
-| 15 | ./components/EndpointList.vue | 144 | 454 | 960 |
-| 16 | ./components/DarkModeToggle.vue | 13 | 43 | 79 |
-| 17 | ./components/TerminalEmulator.vue | 32 | 72 | 162 |
-| 18 | ./components/LoadingOverlay.vue | 22 | 88 | 185 |
-| 19 | ./assets/data/loaderItems.json | 22 | 100 | 219 |
-| 20 | ./stores/loading.js | 36 | 99 | 165 |
-| 21 | ./plugins/fetchLoading.js | 18 | 36 | 98 |
-|  | Total | 705 | 1821 | 3962 |
+| 8 | ./public/endpoints.json | 1148 | 2489 | 6513 |
+| 9 | ./server/tsconfig.json | 4 | 4 | 10 |
+| 10 | ./server/api/login.post.ts | 32 | 107 | 170 |
+| 11 | ./pages/index.vue | 10 | 26 | 68 |
+| 12 | ./pages/login.vue | 66 | 192 | 393 |
+| 13 | ./pages/documentation.vue | 5 | 9 | 27 |
+| 14 | ./pages/test-endpoints.vue | 11 | 21 | 49 |
+| 15 | ./pages/[...slug].vue | 5 | 8 | 23 |
+| 16 | ./components/EndpointList.vue | 144 | 454 | 960 |
+| 17 | ./components/DarkModeToggle.vue | 13 | 43 | 79 |
+| 18 | ./components/TerminalEmulator.vue | 32 | 72 | 162 |
+| 19 | ./components/LoadingOverlay.vue | 22 | 88 | 185 |
+| 20 | ./assets/data/loaderItems.json | 22 | 100 | 219 |
+| 21 | ./stores/loading.js | 36 | 99 | 165 |
+| 22 | ./plugins/fetchLoading.js | 18 | 36 | 98 |
+|  | Total | 1853 | 4310 | 10475 |
 
 
 ## Total Counts Across All Files. Tokenizer Used: NLTK's Punkt Tokenizer
-- Total Lines: 705
-- Total Words: 1821
-- Total AI Tokens: 3962
+- Total Lines: 1853
+- Total Words: 4310
+- Total AI Tokens: 10475
 
 ## File: README.md
 ```md
@@ -342,6 +343,1158 @@ export default defineNuxtConfig({
         - [loading.js](stores/loading.js)
     - **plugins/**
         - [fetchLoading.js](plugins/fetchLoading.js)
+```
+
+## File: public/endpoints.json
+```json
+{
+    "endpoints": [
+        {
+            "id": "RegisterUser",
+            "name": "Register User",
+            "endpoint": "/api/auth/register",
+            "method": "POST",
+            "description": "Registers a new user.",
+            "requestBody": [
+                {
+                    "name": "username",
+                    "type": "string",
+                    "required": true,
+                    "description": "The username of the user.",
+                    "default": "johndoe"
+                },
+                {
+                    "name": "email",
+                    "type": "string",
+                    "required": true,
+                    "description": "The email address of the user.",
+                    "default": "johndoe@example.com"
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "required": true,
+                    "description": "The password for the user account.",
+                    "default": "password123"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 201,
+                    "body": {
+                        "message": "User registered successfully",
+                        "user_id": "<user_id>"
+                    }
+                },
+                "error": {
+                    "statusCode": 400,
+                    "body": {
+                        "error": "Missing required fields"
+                    }
+                }
+            }
+        },
+        {
+            "id": "LoginUser",
+            "name": "Login User",
+            "endpoint": "/api/auth/login",
+            "method": "POST",
+            "description": "Authenticates a user and generates a JWT token for authentication.",
+            "requestBody": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "required": true,
+                    "description": "The email address of the user.",
+                    "default": "johndoe@example.com"
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "required": true,
+                    "description": "The password for the user account.",
+                    "default": "password123"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "Login successful",
+                        "token": "<jwt_token>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get API Keys",
+            "endpoint": "/api/auth/api-keys",
+            "method": "GET",
+            "description": "Retrieves the API keys for the authenticated user.",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "type": "string",
+                    "required": true,
+                    "description": "The JWT token obtained from the login endpoint, in the format 'Bearer <token>'.",
+                    "default": "Bearer <token>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "api_keys": [
+                            {
+                                "id": "<key_id>",
+                                "key": "<api_key>",
+                                "label": "<label>"
+                            }
+                        ]
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "CreateAPIKey",
+            "name": "Create API Key",
+            "endpoint": "/api/auth/api-keys",
+            "method": "POST",
+            "description": "Creates a new API key for the authenticated user.",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "type": "string",
+                    "required": true,
+                    "description": "The JWT token obtained from the login endpoint, in the format 'Bearer <token>'.",
+                    "default": "Bearer <token>"
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "label",
+                    "type": "string",
+                    "required": false,
+                    "description": "A label for the API key.",
+                    "default": "My API Key"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 201,
+                    "body": {
+                        "message": "API key created successfully",
+                        "api_key": "<api_key>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "RevokeAPIKey",
+            "name": "Revoke API Key",
+            "endpoint": "/api/auth/api-keys/<key_id>",
+            "method": "DELETE",
+            "description": "Revokes an API key for the authenticated user.",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "type": "string",
+                    "required": true,
+                    "description": "The JWT token obtained from the login endpoint, in the format 'Bearer <token>'.",
+                    "default": "Bearer <token>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "key_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the API key to revoke.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "API key revoked successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetAllUsers",
+            "name": "Get All Users",
+            "endpoint": "/api/users",
+            "method": "GET",
+            "description": "Retrieves a list of all users.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": [
+                        {
+                            "id": "<user_id>",
+                            "username": "<username>",
+                            "email": "<email>"
+                        }
+                    ]
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetUserbyID",
+            "name": "Get User by ID",
+            "endpoint": "/api/users/<user_id>",
+            "method": "GET",
+            "description": "Retrieves a specific user by their ID.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "user_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the user to retrieve.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "id": "<user_id>",
+                        "username": "<username>",
+                        "email": "<email>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "User not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "CreateUser",
+            "name": "Create User",
+            "endpoint": "/api/users",
+            "method": "POST",
+            "description": "Creates a new user.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "username",
+                    "type": "string",
+                    "required": true,
+                    "description": "The username of the user.",
+                    "default": "janedoe"
+                },
+                {
+                    "name": "email",
+                    "type": "string",
+                    "required": true,
+                    "description": "The email address of the user.",
+                    "default": "janedoe@example.com"
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "required": true,
+                    "description": "The password for the user account.",
+                    "default": "password456"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 201,
+                    "body": {
+                        "message": "User created successfully",
+                        "user_id": "<user_id>"
+                    }
+                },
+                "error": {
+                    "statusCode": 400,
+                    "body": {
+                        "error": "Missing required fields"
+                    }
+                },
+                "unauthorized": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "UpdateUser",
+            "name": "Update User",
+            "endpoint": "/api/users/<user_id>",
+            "method": "PUT",
+            "description": "Updates a user's information.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "user_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the user to update.",
+                    "default": 1
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "username",
+                    "type": "string",
+                    "required": false,
+                    "description": "The updated username of the user.",
+                    "default": "janedoe_updated"
+                },
+                {
+                    "name": "email",
+                    "type": "string",
+                    "required": false,
+                    "description": "The updated email address of the user.",
+                    "default": "janedoe_updated@example.com"
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "required": false,
+                    "description": "The updated password for the user account.",
+                    "default": "newpassword789"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "User updated successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "User not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "DeleteUser",
+            "name": "Delete User",
+            "endpoint": "/api/users/<user_id>",
+            "method": "DELETE",
+            "description": "Deletes a user.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "user_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the user to delete.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "User deleted successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "User not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetAllGroups",
+            "name": "Get All Groups",
+            "endpoint": "/api/groups",
+            "method": "GET",
+            "description": "Retrieves a list of all groups.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": [
+                        {
+                            "id": "<group_id>",
+                            "name": "<group_name>"
+                        }
+                    ]
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetGroupByID",
+            "name": "Get Group by ID",
+            "endpoint": "/api/groups/<group_id>",
+            "method": "GET",
+            "description": "Retrieves a specific group by its ID.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "group_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the group to retrieve.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "id": "<group_id>",
+                        "name": "<group_name>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "Group not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "CreateGroup",
+            "name": "Create Group",
+            "endpoint": "/api/groups",
+            "method": "POST",
+            "description": "Creates a new group.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "description": "The name of the group.",
+                    "default": "New Group"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 201,
+                    "body": {
+                        "message": "Group created successfully",
+                        "group_id": "<group_id>"
+                    }
+                },
+                "error": {
+                    "statusCode": 400,
+                    "body": {
+                        "error": "Missing required fields"
+                    }
+                },
+                "unauthorized": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "UpdateGroup",
+            "name": "Update Group",
+            "endpoint": "/api/groups/<group_id>",
+            "method": "PUT",
+            "description": "Updates a group's information.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "group_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the group to update.",
+                    "default": 1
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "description": "The updated name of the group.",
+                    "default": "Updated Group Name"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "Group updated successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "Group not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "DeleteGroup",
+            "name": "Delete Group",
+            "endpoint": "/api/groups/<group_id>",
+            "method": "DELETE",
+            "description": "Deletes a group.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "group_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the group to delete.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "Group deleted successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "Group not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "SendNotification",
+            "name": "Send Notification",
+            "endpoint": "/api/notifications",
+            "method": "POST",
+            "description": "Sends a notification.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "requestBody": [
+                {
+                    "name": "user_id",
+                    "type": "integer",
+                    "required": false,
+                    "description": "The ID of the user to send the notification to. Either 'user_id', 'group_id', or 'user_ids' must be provided.",
+                    "default": 1
+                },
+                {
+                    "name": "group_id",
+                    "type": "integer",
+                    "required": false,
+                    "description": "The ID of the group to send the notification to. Either 'user_id', 'group_id', or 'user_ids' must be provided.",
+                    "default": 1
+                },
+                {
+                    "name": "user_ids",
+                    "type": "array",
+                    "required": false,
+                    "description": "The IDs of the users to send the notification to. Either 'user_id', 'group_id', or 'user_ids' must be provided.",
+                    "default": [
+                        1,
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "required": true,
+                    "description": "The title of the notification.",
+                    "default": "New Notification"
+                },
+                {
+                    "name": "body",
+                    "type": "string",
+                    "required": true,
+                    "description": "The body content of the notification.",
+                    "default": "This is a new notification."
+                },
+                {
+                    "name": "deep_link",
+                    "type": "string",
+                    "required": false,
+                    "description": "The deep link to include in the notification.",
+                    "default": "https://example.com/notification"
+                },
+                {
+                    "name": "custom_data",
+                    "type": "object",
+                    "required": false,
+                    "description": "Custom data to include in the notification.",
+                    "default": {
+                        "key1": "value1",
+                        "key2": "value2"
+                    }
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "message": "Notification sent successfully"
+                    }
+                },
+                "error": {
+                    "statusCode": 400,
+                    "body": {
+                        "error": "Missing required fields"
+                    }
+                },
+                "unauthorized": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetAllNotifications",
+            "name": "Get All Notifications",
+            "endpoint": "/api/notifications",
+            "method": "GET",
+            "description": "Retrieves a list of all notifications.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": [
+                        {
+                            "id": "<notification_id>",
+                            "title": "<title>",
+                            "body": "<body>",
+                            "sent_at": "<timestamp>"
+                        }
+                    ]
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "id",
+            "name": "Get User Count",
+            "endpoint": "/api/users/count",
+            "method": "GET",
+            "description": "Retrieves the total count of users.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "user_count": "<count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetGroupCount",
+            "name": "Get Group Count",
+            "endpoint": "/api/groups/count",
+            "method": "GET",
+            "description": "Retrieves the total count of groups.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "group_count": "<count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetApplicationCount",
+            "name": "Get Application Count",
+            "endpoint": "/api/applications/count",
+            "method": "GET",
+            "description": "Retrieves the total count of applications.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "application_count": "<count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetDeviceCount",
+            "name": "Get Device Count",
+            "endpoint": "/api/devices/count",
+            "method": "GET",
+            "description": "Retrieves the total count of devices.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "device_count": "<count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetNotificationCount",
+            "name": "Get Notification Count",
+            "endpoint": "/api/notifications/count",
+            "method": "GET",
+            "description": "Retrieves the total count of notifications.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "notification_count": "<count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetUserEngagementMetrics",
+            "name": "Get User Engagement Metrics",
+            "endpoint": "/api/users/<user_id>/engagement",
+            "method": "GET",
+            "description": "Retrieves engagement metrics for a specific user.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "user_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the user to retrieve engagement metrics for.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "user_id": "<user_id>",
+                        "notifications_received": "<notifications_received>",
+                        "devices_registered": "<devices_registered>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "User not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetGroupEngagementMetrics",
+            "name": "Get Group Engagement Metrics",
+            "endpoint": "/api/groups/<group_id>/engagement",
+            "method": "GET",
+            "description": "Retrieves engagement metrics for a specific group.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "group_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the group to retrieve engagement metrics for.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "group_id": "<group_id>",
+                        "notifications_sent": "<notifications_sent>",
+                        "user_count": "<user_count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "Group not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetApplicationEngagementMetrics",
+            "name": "Get Application Engagement Metrics",
+            "endpoint": "/api/applications/<application_id>/engagement",
+            "method": "GET",
+            "description": "Retrieves engagement metrics for a specific application.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "urlParameters": [
+                {
+                    "name": "application_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "The ID of the application to retrieve engagement metrics for.",
+                    "default": 1
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "application_id": "<application_id>",
+                        "notifications_sent": "<notifications_sent>",
+                        "user_count": "<user_count>"
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                },
+                "notFound": {
+                    "statusCode": 404,
+                    "body": {
+                        "error": "Application not found"
+                    }
+                }
+            }
+        },
+        {
+            "id": "GetNotificationHistory",
+            "name": "Get Notification History",
+            "endpoint": "/api/notifications/history",
+            "method": "GET",
+            "description": "Retrieves the notification history.",
+            "headers": [
+                {
+                    "name": "X-API-Key",
+                    "type": "string",
+                    "required": true,
+                    "description": "The API key for authentication.",
+                    "default": "<api_key>"
+                }
+            ],
+            "queryParameters": [
+                {
+                    "name": "limit",
+                    "type": "integer",
+                    "required": false,
+                    "description": "The maximum number of notifications to retrieve.",
+                    "default": 100
+                }
+            ],
+            "response": {
+                "success": {
+                    "statusCode": 200,
+                    "body": {
+                        "notification_history": [
+                            {
+                                "id": "<notification_id>",
+                                "user_id": "<user_id>",
+                                "group_id": "<group_id>",
+                                "application_id": "<application_id>",
+                                "title": "<title>",
+                                "body": "<body>",
+                                "timestamp": "<timestamp>"
+                            }
+                        ]
+                    }
+                },
+                "error": {
+                    "statusCode": 401,
+                    "body": {
+                        "error": "Unauthorized"
+                    }
+                }
+            }
+        }
+    ]
+}
 ```
 
 ## File: server/tsconfig.json

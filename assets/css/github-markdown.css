@@ -1,0 +1,204 @@
+/* assets/css/github-markdown-dark.css */
+.prose {
+    background-color: #0d1117;
+    /* Very dark grey almost black background */
+    border: 1px solid #30363d;
+    /* Dark border color */
+    border-radius: 6px;
+    /* Rounded corners like GitHub */
+    margin: 40px;
+    /* Margin around the container */
+    padding: 16px;
+    /* Padding inside the container */
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+    /* Subtle shadow around the container */
+    max-width: 800px;
+    /* Max width of the container, you can adjust as needed */
+    margin-left: auto;
+    /* Center the container horizontally */
+    margin-right: auto;
+}
+
+.prose a {
+    color: #58a6ff;
+    /* Blue color for links */
+    text-decoration: underline;
+    /* Underline for links */
+}
+
+.prose ul,
+.prose ol {
+  color: #c9d1d9; /* Same color as your main text for list numbers/bullets */
+  list-style: inherit; /* Ensures that bullets/numbers are displayed */
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding-left: 2em; /* Adjust as necessary for alignment */
+}
+
+.prose ul li {
+  list-style-type: disc; /* Style for unordered list items */
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.prose ol li {
+  list-style-type: decimal; /* Style for ordered list items */
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #c9d1d9;
+    /* Same text color for headings */
+}
+
+.prose h1 {
+    font-size: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #30363d;
+    /* Darker border color for heading underlines */
+}
+
+.prose h2 {
+    font-size: 1.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #30363d;
+}
+
+.prose h3 {
+    font-size: 1.25em;
+}
+
+.prose h4 {
+    font-size: 1em;
+}
+
+.prose h5 {
+    font-size: 0.875em;
+}
+
+.prose h6 {
+    font-size: 0.85em;
+    color: #8b949e;
+    /* Slightly lighter grey for less important headings */
+}
+
+.prose p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.prose blockquote {
+    padding: 0 1em;
+    color: #8b949e;
+    border-left: 0.25em solid #30363d;
+    margin: 0;
+}
+
+.prose ul,
+.prose ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 2em;
+}
+
+.prose li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    color: #c9d1d9;
+    /* List color */
+}
+
+.prose table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: #161b22;
+    /* Dark background for table */
+}
+
+.prose table th,
+.prose table td {
+    padding: 6px 13px;
+    border: 1px solid #30363d;
+}
+
+.prose table th {
+    font-weight: 600;
+    background-color: #161b22;
+    color: #c9d1d9;
+}
+
+.prose table tr {
+    background-color: #0d1117;
+    border-top: 1px solid #30363d;
+}
+
+.prose table tr:nth-child(2n) {
+    background-color: #161b22;
+}
+
+.prose code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: #161b22;
+    /* Dark background for inline code */
+    color: #c9d1d9;
+    /* Light grey text for inline code */
+    border-radius: 3px;
+}
+
+.prose pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #161b22;
+    /* Dark background for code blocks */
+    border-radius: 3px;
+    color: #c9d1d9;
+    /* Light grey text for code blocks */
+}
+
+.prose pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    /* Inherit text color for code blocks */
+}
+
+.prose img {
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #0d1117;
+    /* Background color for images */
+}
+
+.prose hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #30363d;
+    /* Darker line color for horizontal rules */
+    border: 0;
+}

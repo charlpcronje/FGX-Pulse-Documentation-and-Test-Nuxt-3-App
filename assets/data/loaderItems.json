@@ -1,0 +1,22 @@
+[
+    { "item": "Images" },
+    { "item": "CSS files" },
+    { "item": "JavaScript files" },
+    { "item": "Font files" },
+    { "item": "HTML templates" },
+    { "item": "JSON data" },
+    { "item": "SVG icons" },
+    { "item": "External libraries" },
+    { "item": "API responses" },
+    { "item": "Analytics scripts" },
+    { "item": "Custom fonts" },
+    { "item": "Static files" },
+    { "item": "Authentication tokens" },
+    { "item": "Video files" },
+    { "item": "Audio files" },
+    { "item": "Configurations" },
+    { "item": "Localization files" },
+    { "item": "User settings" },
+    { "item": "Cache data" },
+    { "item": "Dynamic content" }
+  ]

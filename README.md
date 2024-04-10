@@ -21,8 +21,8 @@ Ensure you have Node.js and npm installed on your system to manage dependencies 
 Clone the repository and install dependencies:
 
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone git@github.com:charlpcronje/FGX-Pulse-Documentation-and-Test-Nuxt-3-App.git
+cd FGX-Pulse-Documentation-and-Test-Nuxt-3-App
 npm install
 ```
 
